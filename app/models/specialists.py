@@ -35,12 +35,16 @@ class Specialist(models.Model):
     is_active = models.BooleanField("Активно")
 
     specializations = models.ManyToManyField(
-        "Specialization", related_name="specialists", verbose_name="Специализации"
+        "Specialization", related_name="specialists", verbose_name="Специализации", blank=True
     )
 
     class Meta:
         verbose_name = "Специалист"
         verbose_name_plural = "Специалисты"
+
+    def titles_split(self) -> list[str]:
+        """Титулы."""
+        return self.titles.split("\n")
 
     def __str__(self) -> str:
         patronymic = f" {self.patronymic}" if self.patronymic else ""
