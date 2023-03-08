@@ -10,21 +10,18 @@ class SpecializationAdmin(admin.ModelAdmin):
 
     list_display = ("guid", "name")
 
-    def has_change_permission(
-        self, _request: HttpRequest, _obj: Specialization | None = None
-    ) -> bool:
-        """Права на изменение."""
-        return False
+    # def has_change_permission(
+    #     self, _request: HttpRequest, _obj: Specialization | None = None
+    # ) -> bool:
+    #     """Права на изменение."""
 
-    def has_add_permission(self, _request: HttpRequest) -> bool:
-        """Права на добавление."""
-        return False
+    # def has_add_permission(self, _request: HttpRequest) -> bool:
+    #     """Права на добавление."""
 
-    def has_delete_permission(
-        self, _request: HttpRequest, _obj: Specialization | None = None
-    ) -> bool:
-        """Права на удаление."""
-        return False
+    # def has_delete_permission(
+    #     self, _request: HttpRequest, _obj: Specialization | None = None
+    # ) -> bool:
+    #     """Права на удаление."""
 
 
 @admin.register(Specialist)

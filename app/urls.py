@@ -23,8 +23,13 @@ from django.urls import path
 from app.views import IndexView, SpecialistsView
 
 
+admin.site.site_header = "Поликлиника УЗИ-4D"
+
+
 urlpatterns = [
+    # Админ панель.
     path("admin/", admin.site.urls),
+    # URL приложения.
     path("", IndexView.as_view(), name="index"),
     path("specialists/", SpecialistsView.as_view(), name="specialists"),
 ]

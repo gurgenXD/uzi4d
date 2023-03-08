@@ -132,4 +132,5 @@ MEDIA_ROOT = APP_DIR / "media"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
+# Переменные приложения
 SERVICE_SOURCE_HOST = "http://195.2.192.1:8880/4d_portalz_08/hs/site/v1"
