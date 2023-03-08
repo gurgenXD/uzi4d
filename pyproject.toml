@@ -18,6 +18,7 @@ pillow = "^9.4.0"
 requests = "^2.28.2"
 django-admin-extra-buttons = "^1.5.6"
 pydantic = "^1.10.5"
+psycopg2 = "^2.9.5"
 
 [tool.poetry.group.dev.dependencies]
 black = "23.1.0"
