@@ -11,7 +11,7 @@ class ServiceAdmin(DjangoMpttAdmin):
 
     list_display = ("guid", "name", "is_group", "is_active", "on_main")
 
-    def has_change_permission(self, _request: HttpRequest, _obj: Service|None =None) -> bool:
+    def has_change_permission(self, _request: HttpRequest, _obj: Service | None = None) -> bool:
         """Права на изменение."""
         return False
 
@@ -19,6 +19,6 @@ class ServiceAdmin(DjangoMpttAdmin):
         """Права на добавление."""
         return False
 
-    def has_delete_permission(self, _request: HttpRequest, _obj: Service|None=None) -> bool:
+    def has_delete_permission(self, _request: HttpRequest, _obj: Service | None = None) -> bool:
         """Права на удаление."""
         return False

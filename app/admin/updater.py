@@ -14,7 +14,7 @@ class UpdaterAdmin(ExtraButtonsMixin, admin.ModelAdmin):
 
     list_display = ("id", "start_update", "end_update", "status")
 
-    def has_change_permission(self, _request: HttpRequest, _obj: Updater|None =None) -> bool:
+    def has_change_permission(self, _request: HttpRequest, _obj: Updater | None = None) -> bool:
         """Права на изменение."""
         return False
 
@@ -22,10 +22,9 @@ class UpdaterAdmin(ExtraButtonsMixin, admin.ModelAdmin):
         """Права на добавление."""
         return False
 
-    def has_delete_permission(self, _request: HttpRequest, _obj: Updater|None=None) -> bool:
+    def has_delete_permission(self, _request: HttpRequest, _obj: Updater | None = None) -> bool:
         """Права на удаление."""
         return False
-
 
     @button(label="Обновить данные", html_attrs={"style": "background-color:#417690"})
     def update(self, request: HttpRequest) -> HttpResponseRedirectToReferrer:

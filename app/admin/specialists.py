@@ -10,7 +10,9 @@ class SpecializationAdmin(admin.ModelAdmin):
 
     list_display = ("guid", "name")
 
-    def has_change_permission(self, _request: HttpRequest, _obj: Specialization|None =None) -> bool:
+    def has_change_permission(
+        self, _request: HttpRequest, _obj: Specialization | None = None
+    ) -> bool:
         """Права на изменение."""
         return False
 
@@ -18,10 +20,11 @@ class SpecializationAdmin(admin.ModelAdmin):
         """Права на добавление."""
         return False
 
-    def has_delete_permission(self, _request: HttpRequest, _obj: Specialization|None=None) -> bool:
+    def has_delete_permission(
+        self, _request: HttpRequest, _obj: Specialization | None = None
+    ) -> bool:
         """Права на удаление."""
         return False
-
 
 
 @admin.register(Specialist)
@@ -30,7 +33,7 @@ class SpecialistAdmin(admin.ModelAdmin):
 
     list_display = ("surname", "name", "patronymic", "on_main", "is_active")
 
-    def has_change_permission(self, _request: HttpRequest, _obj: Specialist|None =None) -> bool:
+    def has_change_permission(self, _request: HttpRequest, _obj: Specialist | None = None) -> bool:
         """Права на изменение."""
         return False
 
@@ -38,6 +41,6 @@ class SpecialistAdmin(admin.ModelAdmin):
         """Права на добавление."""
         return False
 
-    def has_delete_permission(self, _request: HttpRequest, _obj: Specialist|None=None) -> bool:
+    def has_delete_permission(self, _request: HttpRequest, _obj: Specialist | None = None) -> bool:
         """Права на удаление."""
         return False
