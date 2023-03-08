@@ -1,30 +1,34 @@
 import traceback
-from app.models import Specialist, Updater, UpdaterStatusType
+
 from django.utils import timezone
+
+from app.models import Service, Specialist, Updater, UpdaterStatusType
 from app.services.source import SourceAdapter
 
 
 def update_all(host: str) -> None:
+    """Обновить репозиторий."""
     source = SourceAdapter(_host=host)
 
-    updater = Updater(start_update=timezone.now(), status=UpdaterStatusType.PROCESSING).save()
+    updater = Updater(start_update=timezone.now(), status=UpdaterStatusType.PROCESSING.value)
+    updater.save()
 
-    status = UpdaterStatusType.SUCCESS
+    status = UpdaterStatusType.SUCCESS.value
     message = None
     try:
-        Specialist.objects.bulk_create(
-            [Specialist(**specialist.dict()) for specialist in source.get_specialists()]
-        )
+        Specialist.objects.all().delete()
+        for specialist in source.get_specialists():
+            Specialist(**specialist.dict()).save()
 
-        # services_groups = source.get_services_groups()
-        # self._services.create_or_update_groups(services_groups)
+        Service.objects.all().delete()
+        for service_group in source.get_services_groups():
+            Service(**service_group.dict()).save()
 
-        # services = source.get_services()
-        # self._services.create_or_update(services)
-    except Exception:
-        status = UpdaterStatusType.FAILURE
+    except Exception:  # noqa: BLE001
+        status = UpdaterStatusType.FAILURE.value
         message = str(traceback.format_exc())
 
     updater.status = status
     updater.error_log = message
+    updater.end_update = timezone.now()
     updater.save()

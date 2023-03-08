@@ -1,9 +1,12 @@
 from datetime import date
-from pydantic import BaseModel, validator, Field
+
+from pydantic import BaseModel, Field, validator
 
 
-class SourceSpecialistSchema:
-    id: str = Field(alias="Guid1C")
+class SourceSpecialistSchema(BaseModel):
+    """Схема специалистов из источника."""
+
+    guid: str = Field(alias="Guid1C")
     name: str = Field(alias="Name")
     surname: str = Field(alias="Surname")
     patronymic: str | None = Field(alias="MiddleName")
@@ -20,7 +23,7 @@ class SourceSpecialistSchema:
 class SourceServiceGroupSchema(BaseModel):
     """Схема группы услуг из источника."""
 
-    id: str = Field(alias="Guid1C")
+    guid: str = Field(alias="Guid1C")
     parent_id: str | None = Field(alias="ParentGuid1C")
     name: str = Field(alias="GroupName")
     level: int = Field(alias="GroupLevel")
@@ -41,7 +44,7 @@ class SourceServiceGroupSchema(BaseModel):
 class SourceServiceSchema(BaseModel):
     """Схема услуги из источника."""
 
-    id: str = Field(alias="Guid1C")
+    guid: str = Field(alias="Guid1C")
     parent_id: str | None = Field(alias="ParentGuid1C")
     name: str = Field(alias="ProductName")
     level: int = Field(alias="ProductLevel")

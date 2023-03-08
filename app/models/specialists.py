@@ -4,7 +4,7 @@ from django.db import models
 class Specialization(models.Model):
     """Специализация."""
 
-    guid = models.CharField("GUID 1C", max_length=36, primary_key=True)
+    guid = models.CharField("GUID", max_length=36, primary_key=True)
     name = models.CharField("Название", max_length=30)
 
     class Meta:
@@ -18,16 +18,16 @@ class Specialization(models.Model):
 class Specialist(models.Model):
     """Специалист."""
 
-    guid = models.CharField("GUID 1C", max_length=36, primary_key=True)
+    guid = models.CharField("GUID", max_length=36, primary_key=True)
     name = models.CharField("Имя", max_length=50)
     surname = models.CharField("Фамилия", max_length=50)
-    patronymic = models.CharField("Отчество", max_length=50, blank=True, null=True)
+    patronymic = models.CharField("Отчество", max_length=50, blank=True)
     photo = models.ImageField("Фотография", blank=True, null=True)
     start_work_date = models.DateField("Начало работы")
-    education = models.TextField("Образование", blank=True, null=True)
-    activity = models.TextField("Деятельность", blank=True, null=True)
-    description = models.TextField("Описание", blank=True, null=True)
-    titles = models.TextField("Титулы", blank=True, null=True)
+    education = models.TextField("Образование", blank=True)
+    activity = models.TextField("Деятельность", blank=True)
+    description = models.TextField("Описание", blank=True)
+    titles = models.TextField("Титулы", blank=True)
     can_adult = models.BooleanField("Принимает взрослых")
     can_child = models.BooleanField("Принимает детей")
     can_online = models.BooleanField("Проводит онлайн консультацию")
@@ -50,7 +50,7 @@ class Specialist(models.Model):
 class SpecialistCertificate(models.Model):
     """Сертификат специалиста."""
 
-    guid = models.CharField("GUID 1C", max_length=36, primary_key=True)
+    guid = models.CharField("GUID", max_length=36, primary_key=True)
     name = models.CharField("Имя", max_length=250)
     file = models.FileField("Документ")
 
