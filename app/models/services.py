@@ -27,7 +27,7 @@ class Service(MPTTModel):
         verbose_name = "Услуга"
         verbose_name_plural = "Услуги"
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
 
 

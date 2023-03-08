@@ -17,13 +17,13 @@
     {% for city in cities %}
     <div class="tab-pane fade{% if city.id == cities.0.id %} show active{% endif %}" id="adresses-{{ city.id }}"
        role="tabpanel" aria-labelledby="adresses-{{ city.id }}-tab" tabindex="0">
-       {% for office in city.offices %}
+       {% for office in city.get_active_offices %}
        <div class="bg-white shadow-sm rounded-4 overflow-hidden mb-5">
           <div class="row g-0">
              <div class="col-lg-4 address-item-caption">
                 <div class="h-100 d-flex flex-column p-md-5 p-sm-4 p-3">
-                   <a href="branch.html" class="f-2 fs-5 fw-bold link-secondary text-decoration-none mb-3">{{
-                      office.description }}</a>
+                   <a href="branch.html" class="f-2 fs-5 fw-bold link-secondary text-decoration-none mb-3">
+                     {{ office.description }}</a>
 
                    <div class="mb-3">
                       <div class="fs-8 text-muted">Адрес:</div>
@@ -32,8 +32,8 @@
 
                    <div class="mb-3">
                       <div class="fs-8 text-muted">Телефон:</div>
-                      <a href="tel:+79283012171" title="" class="text-decoration-none link-dark">{{ office.phone
-                         }}</a>
+                      <a href="tel:+79283012171" title="" class="text-decoration-none link-dark">
+                        {{ office.phone }}</a>
                    </div>
 
                    <div class="mb-3">
@@ -43,8 +43,8 @@
 
                    <div class="mb-3">
                       <div class="fs-8 text-muted">Электронная почта:</div>
-                      <a href="mailto:klinika@yzi4d.ru" title="" class="text-decoration-none link-dark">{{
-                         office.email }}</a>
+                      <a href="mailto:klinika@yzi4d.ru" title="" class="text-decoration-none link-dark">
+                        {{ office.email }}</a>
                    </div>
 
                    <div class="pt-4 mt-auto">

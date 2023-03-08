@@ -6,7 +6,7 @@ from app.models import Service, Specialist, Updater, UpdaterStatusType
 from app.services.source import SourceAdapter
 
 
-def update_all(host: str) -> None:
+def update_all(host):
     """Обновить репозиторий."""
     source = SourceAdapter(_host=host)
 

@@ -34,7 +34,7 @@ class SourceServiceGroupSchema(BaseModel):
 
     @validator("parent_id", pre=True)
     @classmethod
-    def empty_str_to_none(cls, v: str | None) -> str | None:
+    def empty_str_to_none(cls, v):
         """Перевести пустую строку в None."""
         if v == "":
             return None
@@ -55,7 +55,7 @@ class SourceServiceSchema(BaseModel):
 
     @validator("parent_id", pre=True)
     @classmethod
-    def empty_str_to_none(cls, v: str | None) -> str | None:
+    def empty_str_to_none(cls, v):
         """Перевести пустую строку в None."""
         if v == "":
             return None

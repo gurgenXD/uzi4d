@@ -8,7 +8,7 @@ PAGE_NUMBER_REGEX = re.compile(r"(page=[0-9]*[\&]*)")
 
 
 @register.filter
-def append_page_param(value: str, page_number: str = None) -> str:
+def append_page_param(value, page_number=None):
     """Добавление страницы к URL'у."""
     value = re.sub(PAGE_NUMBER_REGEX, "", value)
 

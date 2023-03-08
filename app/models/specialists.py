@@ -11,7 +11,7 @@ class Specialization(models.Model):
         verbose_name = "Специальность"
         verbose_name_plural = "Специальности"
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
 
 
@@ -42,11 +42,11 @@ class Specialist(models.Model):
         verbose_name = "Специалист"
         verbose_name_plural = "Специалисты"
 
-    def titles_split(self) -> list[str]:
+    def titles_split(self):
         """Титулы."""
         return self.titles.split("\n")
 
-    def __str__(self) -> str:
+    def __str__(self):
         patronymic = f" {self.patronymic}" if self.patronymic else ""
         return f"{self.surname} {self.name}" + patronymic
 
@@ -65,5 +65,5 @@ class SpecialistCertificate(models.Model):
         verbose_name="Специалист",
     )
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name

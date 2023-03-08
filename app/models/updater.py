@@ -23,5 +23,5 @@ class Updater(models.Model):
         verbose_name = "Обновление"
         verbose_name_plural = "Обновления"
 
-    def __str__(self) -> str:
+    def __str__(self):
         return f"{self.id} - {self.status}"

@@ -1,4 +1,4 @@
-from datetime import date, datetime, timezone
+from datetime import datetime, timezone
 
 from django import template
 
@@ -7,14 +7,14 @@ register = template.Library()
 
 
 @register.filter
-def calculate_ages(start_date: date) -> int:
+def calculate_ages(start_date):
     """Посчитать пройденные года."""
     today = datetime.now(tz=timezone.utc).date()
     return today.year - start_date.year
 
 
 @register.filter
-def humanize_age(age: int) -> str:
+def humanize_age(age):
     """Очеловечивание возраста."""
     if age % 100 in (11, 12, 13, 14):
         return f"{age} лет"

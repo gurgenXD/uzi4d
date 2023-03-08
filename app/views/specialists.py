@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest
 from django.shortcuts import render
 from django.views import View
 
@@ -14,7 +14,7 @@ PER_PAGE = 12
 class SpecialistsView(View):
     """Страница специалистов."""
 
-    def get(self, request: HttpRequest) -> HttpResponse:
+    def get(self, request: HttpRequest):
         """Получение специалистов."""
         page_number = request.GET.get("page", 1)
 
