@@ -25,6 +25,8 @@ from app.views import (
     DocumentsView,
     IndexView,
     PromotionsView,
+    ServicesView,
+    ServiceView,
     SpecialistsView,
     SpecialistView,
 )
@@ -40,6 +42,8 @@ urlpatterns = [
     path("", IndexView.as_view(), name="index"),
     path("specialists/", SpecialistsView.as_view(), name="specialists"),
     path("specialists/<guid>", SpecialistView.as_view(), name="specialist"),
+    path("services/", ServicesView.as_view(), name="services"),
+    path("services/<guid>", ServiceView.as_view(), name="service"),
     path("contacts/", ContactsView.as_view(), name="contacts"),
     path("documents/", DocumentsView.as_view(), name="documents"),
     path("promotions/", PromotionsView.as_view(), name="promotions"),

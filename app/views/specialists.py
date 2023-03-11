@@ -56,7 +56,7 @@ class SpecialistView(View):
 
     def get(self, request, guid):
         """Получение специалиста."""
-        specialist = get_object_or_404(Specialist, guid=guid)
+        specialist = get_object_or_404(Specialist, guid=guid, is_active=True)
 
         context = {"specialist": specialist}
 

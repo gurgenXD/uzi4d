@@ -11,8 +11,7 @@
    <div class="container pt-md-5 pt-4 pb-md-6 pb-5">
 
       <ol class="breadcrumb">
-         <li class="breadcrumb-item"><a href="{{ url_for('get_index') }}">Главная</a></li>
-         <li class="breadcrumb-item"><a href="{{ url_for('get_services', type_id=service.service_type.id) }}">{{ service.service_type.name }}</a></li>
+         <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
          <li class="breadcrumb-item active">{{ service.name }}</li>
       </ol>
 
@@ -287,30 +286,32 @@
          </div>
 
          <div class="col-xxl-9 col-xl-8">
-
+            {% if service.description or service.preparation %}
             <div class="bg-white rounded-4 pt-xl-3 pt-md-2 pb-xl-4 pb-3 px-xl-5 px-md-4 px-3 mb-5">
                <div class="nav-links-wrap nav-links-wrap_white">
                   <div class="nav nav-links flex-nowrap mb-md-5 mb-4" id="service-tab" role="tablist">
+                     {% if service.description %}
                      <a href="#" class="nav-link text-nowrap fs-7 px-0 me-5 active" id="service-1-tab"
                         data-bs-toggle="pill" data-bs-target="#service-1" role="tab" aria-controls="service-1"
                         aria-selected="true">Описание</a>
-
-                     <a href="#" class="nav-link text-nowrap fs-7 px-0 me-5" id="service-2-tab" data-bs-toggle="pill"
+                     {% endif %}
+                     <!-- <a href="#" class="nav-link text-nowrap fs-7 px-0 me-5" id="service-2-tab" data-bs-toggle="pill"
                         data-bs-target="#service-2" role="tab" aria-controls="service-2"
                         aria-selected="false">Показания</a>
 
                      <a href="#" class="nav-link text-nowrap fs-7 px-0 me-5" id="service-3-tab" data-bs-toggle="pill"
                         data-bs-target="#service-3" role="tab" aria-controls="service-3"
-                        aria-selected="false">Противопоказания</a>
-
-                     <a href="#" class="nav-link text-nowrap fs-7 px-0 me-5" id="service-4-tab" data-bs-toggle="pill"
+                        aria-selected="false">Противопоказания</a> -->
+                     {% if service.preparation %}
+                     <a href="#" class="nav-link text-nowrap fs-7 px-0 me-5 {% if not service.description %}active{% endif %}" id="service-4-tab" data-bs-toggle="pill"
                         data-bs-target="#service-4" role="tab" aria-controls="service-4"
                         aria-selected="false">Подготовка</a>
+                     {% endif %}
                   </div>
                </div>
 
                <div class="tab-content mb-6" id="service-tabContent">
-
+                  {% if service.description %}
                   <div class="tab-pane fade show active" id="service-1" role="tabpanel"
                      aria-labelledby="service-1-tab" tabindex="0">
 
@@ -319,8 +320,8 @@
                      </div>
 
                   </div>
-
-                  <div class="tab-pane fade" id="service-2" role="tabpanel" aria-labelledby="service-2-tab"
+                  {% endif %}
+                  <!-- <div class="tab-pane fade" id="service-2" role="tabpanel" aria-labelledby="service-2-tab"
                      tabindex="0">
 
                      <div class="article">
@@ -347,24 +348,20 @@
                            дней после колоноскопии.</p>
                      </div>
 
-                  </div>
-
-                  <div class="tab-pane fade" id="service-4" role="tabpanel" aria-labelledby="service-4-tab"
+                  </div> -->
+                  {% if service.preparation %}
+                  <div class="tab-pane fade {% if not service.description %}show active{% endif %}" id="service-4" role="tabpanel" aria-labelledby="service-4-tab"
                      tabindex="0">
 
                      <div class="article">
-                        <p>Трансабдоминальное исследование проводиться на полный мочевой пузырь (рекомендовано не
-                           мочиться за 1,5-2 часа до исследования, выпить до 1л жидкости без газа);</p>
-
-                        <p>Трансректальное исследование проводится на опорожненный мочевой пузырь (накануне
-                           исследования рекомендовано проведение очистительной клизмы).</p>
+                        <p>{{ service.preparation|safe }}</p>
                      </div>
 
                   </div>
-
+                  {% endif %}
                </div>
             </div>
-
+            {% endif %}
             <!-- <div class="bg-white rounded-4 p-xl-5 p-md-4 p-3">
                <h2 class="fs-4 mb-4">Рекомендуем обратить внимание</h2>
 

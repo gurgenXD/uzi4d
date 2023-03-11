@@ -8,8 +8,9 @@ class Service(MPTTModel):
 
     guid = models.CharField("GUID", max_length=36, primary_key=True)
     name = models.CharField("Название", max_length=255)
-    short_description = models.CharField("Короткое описание", max_length=255, null=True, blank=True)
-    description = models.TextField("Короткое описание", null=True, blank=True)
+    short_description = models.CharField("Короткое описание", max_length=255, blank=True)
+    description = models.TextField("Описание", blank=True)
+    preparation = models.TextField("Подготовка", blank=True)
     is_group = models.BooleanField("Группа")
     is_active = models.BooleanField("Активно")
     on_main = models.BooleanField("Показывать на главной")
