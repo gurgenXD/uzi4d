@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}
 <title>Специалисты</title>
 {% endblock %}
@@ -11,8 +13,8 @@
    <div class="container pt-md-5 pt-4 pb-md-6 pb-5">
 
       <ol class="breadcrumb">
-         <li class="breadcrumb-item"><a href="{{ url_for('get_index') }}">Главная</a></li>
-         <li class="breadcrumb-item"><a href="{{ url_for('get_specialists') }}">Cпециалисты</a></li>
+         <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+         <li class="breadcrumb-item"><a href="{% url 'specialists' %}">Cпециалисты</a></li>
          <li class="breadcrumb-item active">{{ specialist.full_name }}</li>
       </ol>
 
@@ -21,11 +23,11 @@
             <div class="col-xl-3 col-lg-4 col-md-5">
             {% if specialist.photo %}
                <div class="doc-hero__img h-100"
-                  style="background-image:url({{ url_for('media', path='/' + specialist.photo) }});">
+                  style="background-image:url({{ specialist.photo.url }});">
                </div>
             {% else %}
                <div class="doc-hero__img h-100"
-                  style="background-image:url({{ url_for('static', path='/img/default_specialist_photo.jpg') }});">
+                  style="background-image:url({% static '/img/default_specialist_photo.jpg' %});">
                </div>
             {% endif %}
             </div>
@@ -38,7 +40,7 @@
                      </h1>
 
                      <div class="row g-lg-3 g-2 mb-lg-5 mb-4">
-                        {% for specialization in specialist.specializations %}
+                        {% for specialization in specialist.specializations.all %}
                         <div class="col-auto">
                            <div class="bg-light-blue text-secondary rounded-pill fs-8 px-lg-3 px-2 py-1">
                               {{ specialization.name }}
@@ -49,16 +51,17 @@
 
                      {% if specialist.description %}<div class="mb-lg-5 mb-4">{{ specialist.description }}</div> {% endif %}
 
-                     <div class="row g-3 align-items-center">
+                     <!-- <div class="row g-3 align-items-center">
                         <div class="col-sm-auto">
                            <a href="#" class="btn btn-danger w-100">Записаться к врачу</a>
                         </div>
-
+                        {% if specialist.can_online %}
                         <div class="col-sm-auto">
                            <a href="#ConsultModal" data-bs-toggle="modal" class="btn btn-primary w-100">Онлайн
                               консультация</a>
                         </div>
-                     </div>
+                        {% endif %}
+                     </div> -->
                   </div>
                </div>
             </div>
@@ -184,7 +187,7 @@
 
                      <div class="fw-light">
                         <ul class="list-markered">
-                           {% for education in specialist.education.split('\n') %}
+                           {% for education in specialist.education_split %}
                            <li>{{ education }}</li>
                            {% endfor %}
                         </ul>
@@ -200,7 +203,7 @@
 
                         <div class="fw-light">
                            <ul class="list-markered">
-                              {% for activity in specialist.activity.split('\n') %}
+                              {% for activity in specialist.activity_split %}
                               <li>{{ activity }}</li>
                               {% endfor %}
                            </ul>
@@ -213,12 +216,12 @@
                      tabindex="0">
 
                      <h2 class="fs-4 fw-extrabold mb-md-4 mb-3">Сертификаты</h2>
-                     {% for certificate in specialist.certificates %}
+                     {% for certificate in specialist.certificates.all %}
                      <div class="position-relative d-flex align-items-center mb-3">
                         <div class="license-thumb flex-shrink-0 ratio ratio-1x1 me-md-4 me-3"
-                           style="background-image: url('{{ url_for('media', path='/' + certificate.path) }}');"></div>
+                           style="background-image: url('{{ certificate.file.url }}');"></div>
 
-                        <a href="{{ url_for('media', path='/' + certificate.path) }}" data-fancybox="certificate-gallery"
+                        <a href="{{ certificate.file.url }}" data-fancybox="certificate-gallery"
                            class="stretched-link text-decoration-none link-secondary">{{ certificate.name }}</a>
                      </div>
                      {% endfor %}

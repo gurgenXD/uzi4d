@@ -5,7 +5,7 @@
     <div class="ratio ratio-5x6 overflow-hidden rounded-3">
        {% if specialist.photo %}
        <div class="doctor-card__img"
-          style="background-image:url({{ specialist.photo.url }});"></div>
+          style="background-image:url('{{ specialist.photo.url }}');"></div>
        {% else %}
        <div class="doctor-card__img"
           style="background-image:url({% static '/img/default_specialist_photo.jpg' %});">
@@ -14,7 +14,7 @@
     </div>
 
     <div class="px-2 pt-3">
-       <a href="#"
+       <a href="{{ specialist.get_absolute_url }}"
           class="stretched-link d-block text-decoration-none link-secondary fw-medium mb-2">
           {{ specialist.surname }}
           <br>{{ specialist.name }}{% if specialist.patronymic %} {{ specialist.patronymic }} {% endif %}

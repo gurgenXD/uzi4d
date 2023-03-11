@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Specialization(models.Model):
@@ -42,13 +43,30 @@ class Specialist(models.Model):
         verbose_name = "Специалист"
         verbose_name_plural = "Специалисты"
 
+    def education_split(self):
+        """Образование."""
+        return self.education.split("\n")
+
+    def activity_split(self):
+        """Деятельность."""
+        return self.activity.split("\n")
+
     def titles_split(self):
         """Титулы."""
         return self.titles.split("\n")
 
     def __str__(self):
+        return self.full_name
+
+    @property
+    def full_name(self):
+        """Полное имя врача."""
         patronymic = f" {self.patronymic}" if self.patronymic else ""
         return f"{self.surname} {self.name}" + patronymic
+
+    def get_absolute_url(self):
+        """Ссылка на специалиста."""
+        return reverse("specialist", args=[self.guid])
 
 
 class SpecialistCertificate(models.Model):

@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 
 from app.forms.specialists import SpecialistsFilterForm
@@ -49,3 +49,15 @@ class SpecialistsView(View):
             "form": form,
         }
         return render(request, "specialists.html", context)
+
+
+class SpecialistView(View):
+    """Страница специалиста."""
+
+    def get(self, request, guid):
+        """Получение специалиста."""
+        specialist = get_object_or_404(Specialist, guid=guid)
+
+        context = {"specialist": specialist}
+
+        return render(request, "specialist.html", context)
