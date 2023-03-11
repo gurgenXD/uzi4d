@@ -14,7 +14,7 @@ class UpdaterStatusType(Enum):
 class Updater(models.Model):
     """Обновления."""
 
-    start_update = models.DateTimeField("Время налача")
+    start_update = models.DateTimeField("Время начала")
     end_update = models.DateTimeField("Время окончания", null=True, blank=True)
     status = models.CharField("Статус", max_length=20)
     error_log = models.TextField("Текст ошибки", blank=True)

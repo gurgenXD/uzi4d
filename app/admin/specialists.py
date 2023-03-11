@@ -27,14 +27,11 @@ class SpecialistAdmin(admin.ModelAdmin):
 
     list_display = ("surname", "name", "patronymic", "on_main", "is_active")
 
-    def has_change_permission(self, _request, _obj=None):
-        """Права на изменение."""
-        return False
+    # def has_change_permission(self, _request, _obj=None):
+    #     """Права на изменение."""
 
-    def has_add_permission(self, _request):
-        """Права на добавление."""
-        return False
+    # def has_add_permission(self, _request):
+    #     """Права на добавление."""
 
-    def has_delete_permission(self, _request, _obj=None):
-        """Права на удаление."""
-        return False
+    # def has_delete_permission(self, _request, _obj=None):
+    #     """Права на удаление."""

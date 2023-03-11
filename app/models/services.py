@@ -7,8 +7,8 @@ class Service(MPTTModel):
     """Услуги."""
 
     guid = models.CharField("GUID", max_length=36, primary_key=True)
-    name = models.CharField("Название", max_length=100)
-    short_description = models.CharField("Короткое описание", max_length=300, null=True, blank=True)
+    name = models.CharField("Название", max_length=255)
+    short_description = models.CharField("Короткое описание", max_length=255, null=True, blank=True)
     description = models.TextField("Короткое описание", null=True, blank=True)
     is_group = models.BooleanField("Группа")
     is_active = models.BooleanField("Активно")

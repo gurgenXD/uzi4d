@@ -11,7 +11,7 @@
    <div class="container pt-md-5 pt-4">
 
       <ol class="breadcrumb">
-         <li class="breadcrumb-item"><a href="index.html">Главная</a></li>
+         <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
          <li class="breadcrumb-item active">Спецпредложения</li>
       </ol>
 
@@ -28,11 +28,11 @@
                         <a href="#"
                            class="stretched-link d-block text-decoration-none link-secondary fs-2 fw-extrabold mb-3">{{ promotion.name }}</a>
                         <div class="d-inline-block bg-light-blue rounded f-2 fw-semibold lh-1 py-2 px-3 mb-4">
-                           с {{ promotion.date_start.strftime("%d.%m.%y") }} по {{ promotion.date_end.strftime("%d.%m.%y") }}
+                           с {{ promotion.date_start|date:"j E" }} по {{ promotion.date_end|date:"j E" }}
                         </div>
 
                         <ul class="list-unstyled mb-3">
-                           <li class="mb-3">{{ promotion.description }}</li>
+                           <li class="mb-3">{% if promotion.description %} {{ promotion.description|safe }} {% endif %}</li>
                         </ul>
                      </div>
                   </div>
@@ -40,7 +40,7 @@
 
                <div class="col-xl-6 col-lg-5 col-md-4">
                   <div class="sale-item__img position-relative h-100 bg-img"
-                     style="background-image: url({{ url_for('media', path='/' + promotion.photo) }});">
+                     style="background-image: url('{{ promotion.photo.url }}');">
                   </div>
                </div>
             </div>

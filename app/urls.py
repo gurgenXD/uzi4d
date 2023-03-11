@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from app.views import ContactsView, IndexView, SpecialistsView
+from app.views import ContactsView, DocumentsView, IndexView, PromotionsView, SpecialistsView
 
 
 admin.site.site_header = "Поликлиника УЗИ-4D"
@@ -33,6 +33,8 @@ urlpatterns = [
     path("", IndexView.as_view(), name="index"),
     path("specialists/", SpecialistsView.as_view(), name="specialists"),
     path("contacts/", ContactsView.as_view(), name="contacts"),
+    path("documents/", DocumentsView.as_view(), name="documents"),
+    path("promotions/", PromotionsView.as_view(), name="promotions"),
 ]
 
 

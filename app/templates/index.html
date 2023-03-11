@@ -36,7 +36,7 @@
                                                                 class="d-inline-block bg-light-blue rounded f-2 fw-semibold lh-1 py-2 px-3 mb-4">
                                                                 {{ promotion.date_start|date:"j E" }} - {{ promotion.date_end|date:"j E" }}
                                                             </div>
-                                                            {% if promotion.description %} {{ promotion.description|safe }} {% endif %} 
+                                                            <br>{% if promotion.description %} {{ promotion.description|safe }} {% endif %}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -657,97 +657,25 @@
 
                 <div class="swiper rates-slider px-md-3 pb-md-4">
                     <div class="swiper-wrapper">
+                        {% for rating in ratings %}
                         <div class="swiper-slide">
                             <div class="rate-item bg-white rounded-3 shadow-sm d-flex align-items-center p-sm-4 p-3">
 
                                 <div class="rate-item__img">
-                                    <img src="{% static '/img/dynamic-img/yandex.svg' %}" alt="">
+                                    <img src="{{ rating.photo.url }}" alt="">
                                 </div>
 
-                                <div class="rate-item__number f-2 fw-bold text-danger lh-1 me-3">4.8</div>
+                                <div class="rate-item__number f-2 fw-bold text-danger lh-1 me-3">{{ rating.score }}</div>
 
                                 <div>
-                                    <a href="https://yandex.ru/profile/1154946954?intent=reviews&utm_source=badge&utm_medium=rating&utm_campaign=v1" target="_blank"
-                                        class="stretched-link text-decoration-none link-secondary fw-semibold">Яндекс</a>
+                                    <a href="{{ rating.link }}" target="_blank"
+                                        class="stretched-link text-decoration-none link-secondary fw-semibold">{{ rating.name }}</a>
 
-                                    <div class="fs-8 text-muted">739 отзывов</div>
+                                    <div class="fs-8 text-muted">{{ rating.reviews_count }}</div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="swiper-slide">
-                            <div class="rate-item bg-white rounded-3 shadow-sm d-flex align-items-center p-sm-4 p-3">
-
-                                <div class="rate-item__img">
-                                    <img src="{% static '/img/dynamic-img/2gis.svg' %}" alt="">
-                                </div>
-
-                                <div class="rate-item__number f-2 fw-bold text-danger lh-1 me-3">4.7</div>
-
-                                <div>
-                                    <a href="https://go.2gis.com/6tc14c" target="_blank"
-                                        class="stretched-link text-decoration-none link-secondary fw-semibold">2ГИС</a>
-
-                                    <div class="fs-8 text-muted">152 отзывов</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <div class="rate-item bg-white rounded-3 shadow-sm d-flex align-items-center p-sm-4 p-3">
-
-                                <div class="rate-item__img">
-                                    <img src="{% static '/img/dynamic-img/sber.svg' %}" alt="">
-                                </div>
-
-                                <div class="rate-item__number f-2 fw-bold text-danger lh-1 me-3">4.9</div>
-
-                                <div>
-                                    <a href="#" target="_blank"
-                                        class="stretched-link text-decoration-none link-secondary fw-semibold">Сбер
-                                        Здоровье</a>
-
-                                    <div class="fs-8 text-muted">59 отзывов</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <div class="rate-item bg-white rounded-3 shadow-sm d-flex align-items-center p-sm-4 p-3">
-
-                                <div class="rate-item__img">
-                                    <img src="{% static '/img/dynamic-img/prodoctorov.svg' %}" alt="">
-                                </div>
-
-                                <div class="rate-item__number f-2 fw-bold text-danger lh-1 me-3">5.0</div>
-
-                                <div>
-                                    <a href="https://prodoctorov.ru/pyatigorsk/lpu/24199-klinika-innovacionnoy-mediciny-4d/#rating" target="_blank"
-                                        class="stretched-link text-decoration-none link-secondary fw-semibold">ПроДокторов</a>
-
-                                    <div class="fs-8 text-muted">251 отзыв</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <div class="rate-item bg-white rounded-3 shadow-sm d-flex align-items-center p-sm-4 p-3">
-
-                                <div class="rate-item__img">
-                                    <img src="{% static '/img/dynamic-img/prodoctorov.svg' %}" alt="">
-                                </div>
-
-                                <div class="rate-item__number f-2 fw-bold text-danger lh-1 me-3">4.1</div>
-
-                                <div>
-                                    <a href="https://doctu.ru/pyatigorsk/clinic/poliklinika-4d-1/reviews" target="_blank"
-                                        class="stretched-link text-decoration-none link-secondary fw-semibold">Докту</a>
-
-                                    <div class="fs-8 text-muted">19 отзывов</div>
-                                </div>
-                            </div>
-                        </div>
-
+                        {% endfor %}
                     </div>
                 </div>
             </div>

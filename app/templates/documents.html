@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Лицензии и документы</title>
+{% endblock %}
+
+{% block content %}
+
+   <main role="main" class="flex-shrink-0">
+      <div class="container pt-md-5 pt-4">
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item active">Лицензии и документы
+            </li>
+         </ol>
+
+         <h1 class="mb-md-5 mb-4">Лицензии и документы</h1>
+
+         <div class="article">
+            {% for document_category in documents_categories %}
+               <h3>{{ document_category.name }}</h3>
+               {% for document in document_category.documents.all %}
+                  <p>
+                     <a href="{{ document.file.url }}">{{ document.name }}</a>
+                  </p>
+               {% endfor %}
+            {% endfor %}
+         </div>
+      </div>
+
+   </main>
+{% endblock %}

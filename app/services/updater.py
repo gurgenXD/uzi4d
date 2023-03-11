@@ -14,7 +14,7 @@ def update_all(host):
     updater.save()
 
     status = UpdaterStatusType.SUCCESS.value
-    message = None
+    message = ""
     try:
         Specialist.objects.all().delete()
         for specialist in source.get_specialists():
@@ -23,6 +23,9 @@ def update_all(host):
         Service.objects.all().delete()
         for service_group in source.get_services_groups():
             Service(**service_group.dict()).save()
+
+        for service in source.get_services():
+            Service(**service.dict()).save()
 
     except Exception:  # noqa: BLE001
         status = UpdaterStatusType.FAILURE.value
