@@ -29,11 +29,6 @@ class ServiceSchema(BaseModel):
     guid: str = Field(alias="Guid1C")
     parent_id: str = Field(alias="ParentGuid1C")
     name: str = Field(alias="ProductName")
-    level: int = Field(alias="SequenceNumber")
-
-    on_main: bool = False
-    is_active: bool = True
-    is_group: bool = False
 
     @validator("parent_id", pre=True)
     @classmethod
@@ -50,12 +45,15 @@ class CatalogItemSchema(BaseModel):
     parent_id: str | None = Field(alias="ParentGuid1C")
     services: list[ServiceSchema] = Field(alias="ProductList")
 
-    on_main: bool = False
-    is_active: bool = True
-    is_group: bool = True
-
     @validator("parent_id", pre=True)
     @classmethod
     def empty_str_to_none(cls, v):
         """Перевести пустую строку в None."""
         return None if v == EMPTY_GUID else v
+
+
+class CatalogSchema(BaseModel):
+    """Схема каталога."""
+
+    guid: str = Field(alias="Guid1C")
+    name: str = Field(alias="CatalogName")

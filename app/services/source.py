@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 import requests
 
-from app.services.schemas import CatalogItemSchema, SourceSpecialistSchema
+from app.services.schemas import CatalogItemSchema, CatalogSchema, SourceSpecialistSchema
 
 
 @dataclass
@@ -16,6 +16,11 @@ class SourceAdapter:
         """Получить специалистов."""
         response = requests.get(f"{self._host}/doctor/GetDoctorList", timeout=self._timeout)
         return [SourceSpecialistSchema(**item) for item in response.json()]
+
+    def get_catalogs(self):
+        """Получить каталоги."""
+        response = requests.get(f"{self._host}/product/GetCatalogList", timeout=self._timeout)
+        return [CatalogSchema(**catalog) for catalog in response.json()]
 
     def get_catalog_content(self, guid):
         """Получить содержимое каталога."""
