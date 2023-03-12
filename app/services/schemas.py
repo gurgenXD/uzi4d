@@ -3,6 +3,9 @@ from datetime import date
 from pydantic import BaseModel, Field, validator
 
 
+EMPTY_GUID = "00000000-0000-0000-0000-000000000000"
+
+
 class SourceSpecialistSchema(BaseModel):
     """Схема специалистов из источника."""
 
@@ -20,34 +23,13 @@ class SourceSpecialistSchema(BaseModel):
     can_online: bool = False
 
 
-class SourceServiceGroupSchema(BaseModel):
-    """Схема группы услуг из источника."""
+class ServiceSchema(BaseModel):
+    """Схема услуги."""
 
     guid: str = Field(alias="Guid1C")
-    parent_id: str | None = Field(alias="ParentGuid1C")
-    name: str = Field(alias="GroupName")
-    level: int = Field(alias="GroupLevel")
-
-    on_main: bool = False
-    is_active: bool = True
-    is_group: bool = True
-
-    @validator("parent_id", pre=True)
-    @classmethod
-    def empty_str_to_none(cls, v):
-        """Перевести пустую строку в None."""
-        if v == "":
-            return None
-        return v
-
-
-class SourceServiceSchema(BaseModel):
-    """Схема услуги из источника."""
-
-    guid: str = Field(alias="Guid1C")
-    parent_id: str | None = Field(alias="ParentGuid1C")
+    parent_id: str = Field(alias="ParentGuid1C")
     name: str = Field(alias="ProductName")
-    level: int = Field(alias="ProductLevel")
+    level: int = Field(alias="SequenceNumber")
 
     on_main: bool = False
     is_active: bool = True
@@ -57,6 +39,23 @@ class SourceServiceSchema(BaseModel):
     @classmethod
     def empty_str_to_none(cls, v):
         """Перевести пустую строку в None."""
-        if v == "":
-            return None
-        return v
+        return None if v == EMPTY_GUID else v
+
+
+class CatalogItemSchema(BaseModel):
+    """Схема элемента каталога."""
+
+    guid: str = Field(alias="Guid1C")
+    name: str = Field(alias="CatalogName")
+    parent_id: str | None = Field(alias="ParentGuid1C")
+    services: list[ServiceSchema] = Field(alias="ProductList")
+
+    on_main: bool = False
+    is_active: bool = True
+    is_group: bool = True
+
+    @validator("parent_id", pre=True)
+    @classmethod
+    def empty_str_to_none(cls, v):
+        """Перевести пустую строку в None."""
+        return None if v == EMPTY_GUID else v

@@ -21,12 +21,10 @@ def update_all(host):
             Specialist(**specialist.dict()).save()
 
         Service.objects.all().delete()
-        for service_group in source.get_services_groups():
-            Service(**service_group.dict()).save()
-
-        for service in source.get_services():
-            Service(**service.dict()).save()
-
+        for group in source.get_catalog_content(guid="5b06b6c4-c0cd-11ed-9688-70cf49616281"):
+            Service(**group.dict(exclude={"services"})).save()
+            for service in group.services:
+                Service(**service.dict()).save()
     except Exception:  # noqa: BLE001
         status = UpdaterStatusType.FAILURE.value
         message = str(traceback.format_exc())

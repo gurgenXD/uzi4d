@@ -2,11 +2,7 @@ from dataclasses import dataclass
 
 import requests
 
-from app.services.schemas import (
-    SourceServiceGroupSchema,
-    SourceServiceSchema,
-    SourceSpecialistSchema,
-)
+from app.services.schemas import CatalogItemSchema, SourceSpecialistSchema
 
 
 @dataclass
@@ -21,12 +17,12 @@ class SourceAdapter:
         response = requests.get(f"{self._host}/doctor/GetDoctorList", timeout=self._timeout)
         return [SourceSpecialistSchema(**item) for item in response.json()]
 
-    def get_services_groups(self):
-        """Получить группы услуг."""
-        response = requests.get(f"{self._host}/product/GetProductGroups", timeout=self._timeout)
-        return [SourceServiceGroupSchema(**item) for item in response.json()]
+    def get_catalog_content(self, guid):
+        """Получить содержимое каталога."""
+        response = requests.get(
+            f"{self._host}/product/GetCatalogContentByID",
+            params={"CatalogID": guid},
+            timeout=self._timeout,
+        )
 
-    def get_services(self):
-        """Получить услуги."""
-        response = requests.get(f"{self._host}/product/GetExtProductList", timeout=self._timeout)
-        return [SourceServiceSchema(**item) for item in response.json()]
+        return [CatalogItemSchema(**content) for content in response.json()]
