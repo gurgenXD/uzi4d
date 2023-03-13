@@ -1,32 +1,52 @@
 {% extends "base.html" %}
 
 {% block title %}
-<title>Лицензии и документы</title>
+<title>Документы и лицензии</title>
 {% endblock %}
 
 {% block content %}
 
    <main role="main" class="flex-shrink-0">
+
       <div class="container pt-md-5 pt-4">
+
          <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
-            <li class="breadcrumb-item active">Лицензии и документы
-            </li>
+            <li class="breadcrumb-item active">Документы и лицензии</li>
          </ol>
 
-         <h1 class="mb-md-5 mb-4">Лицензии и документы</h1>
+         <h1 class="mb-md-5 mb-4">Документы и лицензии</h1>
+
+         <div class="row g-4">
+            {% for license in licenses %}
+            <div class="col-xxl-3 col-xl-4 col-md-6">
+               <div
+                  class="main-service-item h-100 d-flex flex-column position-relative bg-light-blue rounded-3 text-secondary p-sm-4 p-3"
+                  style="background-image:url('img/document-bg-icon.svg');">
+
+                  <a href="{{ license.file.url }}"
+                     class="stretched-link d-block text-decoration-none link-secondary f-2 fw-extrabold mb-2">{{ license.name }}</a>
+
+                  <div class="fs-8">{{ license.number }}</div>
+               </div>
+            </div>
+            {% endfor %}
+         </div>
 
          <div class="article">
             {% for document_category in documents_categories %}
-               <h3>{{ document_category.name }}</h3>
+            <h3>{{ document_category.name }}</h3>
+
+            <ul>
                {% for document in document_category.documents.all %}
-                  <p>
-                     <a href="{{ document.file.url }}">{{ document.name }}</a>
-                  </p>
+               <li><a href="#">{{ document.name }}</a></li>
                {% endfor %}
+            </ul>
             {% endfor %}
          </div>
+
       </div>
 
    </main>
+
 {% endblock %}

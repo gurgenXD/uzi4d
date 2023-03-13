@@ -34,3 +34,19 @@ class Document(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class License(models.Model):
+    """Лицензия."""
+
+    name = models.CharField("Название", max_length=30)
+    number = models.CharField("Номер", max_length=50)
+    file = models.FileField("Документ")
+    link = models.URLField("Ссылка", max_length=255, blank=True)
+
+    class Meta:
+        verbose_name = "Лицензия"
+        verbose_name_plural = "Лицензии"
+
+    def __str__(self):
+        return self.name

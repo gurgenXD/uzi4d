@@ -12,7 +12,7 @@ migrations-down: ## Откатить последнюю миграцию.
 	$(POETRY_RUN) python manage.py migrate
 
 start-app: ## Запусть APP.
-	$(POETRY_RUN) python manage.py runserver
+	$(POETRY_RUN) python manage.py runserver 127.0.0.1:8080
 
 
 lint: ## Проверить код.
